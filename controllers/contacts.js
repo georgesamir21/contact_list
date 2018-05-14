@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser').json(); //.urlencoded();
 const validator = require('validator');
-// const path = require('path');
-const mobileRegex = /^(\+2|)[0-9]{11}/;
+
+const mobileRegex = /^(\+201|01)[0-9]{9}/;
 
 const ContactsModel = require('../models/contacts'); 
 const UsersModel = require('../models/users');
@@ -82,6 +82,7 @@ router.post('/addContact',bodyParser, authMid, inputValidation,(request, respons
         if(!err) {
             let message = {
                 statusCode: response.statusCode,
+                success: true,                
                 message: 'Contact added!',
                 data: result
             }
@@ -95,11 +96,10 @@ router.post('/addContact',bodyParser, authMid, inputValidation,(request, respons
 
 router.post('/getList',bodyParser, authMid,(request, response)=>{
     ContactsModel.findUserContacts(userId, request.body.pageNo, (err, result)=>{
-        console.log(response.statusCode);
-        
         if(!err){
             let message = {
                 statusCode: response.statusCode,
+                success: true,                
                 message: 'Conatcts list',
                 data: result
             }
@@ -119,6 +119,7 @@ router.post('/getRecentList',bodyParser, authMid, (request, response)=>{
         if(!err){
             let message = {
                 statusCode: response.statusCode,
+                success: true,
                 message: 'Recent List',
                 data: result
             }

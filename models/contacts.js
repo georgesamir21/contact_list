@@ -17,11 +17,9 @@ let contacts = new Schema({
     email: {
         type: String,
         required: true,        
-        //unique: true,
     },
     mobile: {
         type: String,
-        //unique: true,
         required: true,
     },
     userId: {
